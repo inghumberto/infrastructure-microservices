@@ -1,0 +1,6 @@
+[submodule "authentication-miroservice"]
+	path = authentication-miroservice
+	url = https://github.com/inghumberto/authentication-miroservice.git
+[submodule "transport-microservice"]
+	path = transport-microservice
+	url = https://github.com/inghumberto/transport-microservice.git
