@@ -72,7 +72,5 @@ services:
       - locally
 volumes:
   db:
-volumes:
-  db:
 networks:
   locally:
