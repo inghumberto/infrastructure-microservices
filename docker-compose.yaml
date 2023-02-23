@@ -12,6 +12,8 @@ services:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
       - db:/var/lib/mysql
+    networks:
+      - locally
   api-transport:
     depends_on:
       - mysqldb
@@ -27,6 +29,8 @@ services:
       - .m2:/root/.m2
     stdin_open: true
     tty: true
+    networks:
+      - locally
   api-auth:
     depends_on:
       - mysqldb
@@ -43,8 +47,12 @@ services:
       - .m2:/root/.m2
     stdin_open: true
     tty: true
+  networks:
+      - locally
 
 volumes:
   db:
 volumes:
   db:
+networks:
+  locally:
