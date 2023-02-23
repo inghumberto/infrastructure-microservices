@@ -47,9 +47,29 @@ services:
       - .m2:/root/.m2
     stdin_open: true
     tty: true
-  networks:
+    networks:
+      - locally
+  zookeeper:
+    image: zookeeper:3.7.0
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    networks:
       - locally
 
+  kafka:
+    image: confluentinc/cp-kafka:6.2.1
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://localhost:9092"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - locally
 volumes:
   db:
 volumes:
